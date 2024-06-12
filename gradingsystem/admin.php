@@ -9,17 +9,19 @@ if ($_SESSION['role'] !== 'admin') {
 <?php include 'hui.php' ?>
 <?php include 'adduser.php'; ?>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+<link rel="stylesheet" href="style.css">
 
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
-    <script defer src="script.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+<script defer src="script.js"></script>
+
 <body>
     <div class="container-fluid">
         <aside class="sidebar">
@@ -99,8 +101,8 @@ if ($_SESSION['role'] !== 'admin') {
     <script>
         //List of Admins//
         function showAdmin() {
-    var mainContent = document.getElementById('mainContent');
-    mainContent.innerHTML = `
+            var mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
         <style>
             .smaller-table {
                 font-size: 0.8em; /* Adjust as needed */
@@ -136,80 +138,102 @@ if ($_SESSION['role'] !== 'admin') {
         </table>
     `;
 
-    // Fetch the admin data from the server using AJAX
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'fetch_admins.php', true);
-    xhr.onload = function() {
-        if (this.status == 200) {
-            // Parse the JSON data
-            var admins = JSON.parse(this.responseText);
+            // Fetch the admin data from the server using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetch_admins.php', true);
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    // Parse the JSON data
+                    var admins = JSON.parse(this.responseText);
 
-            // Get the table body
-            var tbody = document.querySelector('#adminTable tbody');
+                    // Get the table body
+                    var tbody = document.querySelector('#adminTable tbody');
 
-            // Insert the admin data into the table
-            for (var i = 0; i < admins.length; i++) {
-                var tr = document.createElement('tr');
-                var fullname = `${admins[i].fname} ${admins[i].mname} ${admins[i].lname} ${admins[i].ename}`;
-                tr.innerHTML = `
+                    // Insert the admin data into the table
+                    for (var i = 0; i < admins.length; i++) {
+                        var tr = document.createElement('tr');
+                        var fullname = `${admins[i].fname} ${admins[i].mname} ${admins[i].lname} ${admins[i].ename}`;
+                        tr.innerHTML = `
                     <th scope="row">${i + 1}</th>
                     <td>${fullname}</td>
                     <td>${admins[i].age}</td>
                     <td>${admins[i].address}</td>
                     <td>${admins[i].gender}</td>
                 `;
-                tbody.appendChild(tr);
-            }
+                        tbody.appendChild(tr);
+                    }
 
-            // Initialize DataTable
-            $('#adminTable').DataTable();
+                    // Initialize DataTable
+                    $('#adminTable').DataTable();
+                }
+            };
+            xhr.send();
         }
-    };
-    xhr.send();
-}
 
-// Ensure the function is called to render the admin table
-document.addEventListener('DOMContentLoaded', showAdmin);
+        // Ensure the function is called to render the admin table
+        document.addEventListener('DOMContentLoaded', showAdmin);
 
         //Add Teacher//
         function showNewTeacher() {
             var mainContent = document.getElementById('mainContent');
             mainContent.innerHTML = `  <?php include 'conn.php'; ?>
-            
     <h3>Teacher Submitter Form</h3>
         <div class="registration-form">
         <form id="teacherForm">
-                <div class="form-group">
-                    <input type="text" class="form-control item" id="name" placeholder="Fullname" name="name" required>
-                </div>
-                <div class="form-group">
-                    <input type="number" class="form-control item" id="age" placeholder="Age" name="age" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control item" id="birthdate" placeholder="Birthdate" name="birthdate" required>
-                </div>
-                <div class="form-group">
-                    <select class="form-control item" id="gender" placeholder="Gender" name="gender" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control item" id="email" placeholder="Email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control item" id="username" placeholder="Username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control item" id="password" placeholder="Password" name="password" required>
-                </div>
+        <div class="form-group">
+                <label for="fname">First Name:</label>
+                <input type="text" class="form-control item" id="fname" placeholder="Example: Juan" required>
+            </div>
+            <div class="form-group">
+                <label for="mname">Middle Name:</label>
+                <input type="text" class="form-control item" id="mname" placeholder="Example: Dela" required>
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                <input type="text" class="form-control item" id="lname" placeholder="Example: Crunchy" required>
+            </div>
+            <div class="form-group">
+                <label for="ename">Extension Name:</label>
+                <input type="text" class="form-control item" id="ename" placeholder="Example: Sr.">
+            </div>
+            <div class="form-group">
+                <label for="nickname">Nickname:</label>
+                <input type="text" class="form-control item" id="nickname" placeholder="Example: Tutu" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control item" id="age" placeholder="Example: 12" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control item" id="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Birthdate:</label>
+                <input type="date" class="form-control item" id="birthdate" placeholder="Example: 01/01/2001">
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control item" id="address" placeholder="Example: Purok. Pinetree, Brgy. Oringao, Kabankalan City, Negros Occidental." required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control item" id="username" placeholder="Example: @JuanFGSNHS" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control item" id="password" placeholder="" required>
+            </div>
                 <div class="form-group">
                     <label for="role">Role:</label>
                     <input type="text" class="form-control item" id="role" name="role" value="teacher" readonly>
                 </div>
                 <div class="form-group">
                 <label for="img">Profile Image URL:</label>
-                <input type="url" class="form-control item" id="img" placeholder="Profile Image URL" name="img" required>
+                <input type="url" class="form-control item" id="img" placeholder="Example: juan.jpg" name="img" required>
             </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Create Account</button>                
@@ -217,14 +241,18 @@ document.addEventListener('DOMContentLoaded', showAdmin);
             </form>
         </div>
     `;
-            document.getElementById('teacherForm').addEventListener('submit', function(e) {
+            document.getElementById('teacherForm').addEventListener('submit', function (e) {
                 e.preventDefault(); // Prevent the default form submission
 
-                var name = document.getElementById('name').value;
+                var fname = document.getElementById('fname').value;
+                var mname = document.getElementById('mname').value;
+                var lname = document.getElementById('lname').value;
+                var ename = document.getElementById('ename').value;
+                var nickname = document.getElementById('nickname').value;
                 var age = document.getElementById('age').value;
-                var birthdate = document.getElementById('birthdate').value;
                 var gender = document.getElementById('gender').value;
-                var email = document.getElementById('email').value;
+                var birthdate = document.getElementById('birthdate').value;
+                var address = document.getElementById('address').value;
                 var username = document.getElementById('username').value;
                 var password = document.getElementById('password').value;
                 var role = document.getElementById('role').value;
@@ -234,9 +262,9 @@ document.addEventListener('DOMContentLoaded', showAdmin);
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'tdbconn.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send('name=' + name + '&age=' + age + '&birthdate=' + birthdate + '&gender=' + gender + '&email=' + email + '&username=' + username + '&password=' + password + '&role=' + role + '&img=' + img);
+                xhr.send('fname=' + fname + '&mname=' + mname + '&lname=' + lname + '&ename=' + ename + '&nickname=' + nickname + '&age=' + age + '&birthdate=' + birthdate + '&gender=' + gender + '&address=' + address + '&username=' + username + '&password=' + password + '&role=' + role + '&img=' + img);
 
-                xhr.onload = function() {
+                xhr.onload = function () {
                     if (this.status == 200) {
                         // Handle the response from the server
                         var response = JSON.parse(this.responseText);
@@ -259,7 +287,6 @@ document.addEventListener('DOMContentLoaded', showAdmin);
                     }
                 };
             });
-
         }
 
 
@@ -267,41 +294,78 @@ document.addEventListener('DOMContentLoaded', showAdmin);
         function showNewAdmin() {
             var mainContent = document.getElementById('mainContent');
             mainContent.innerHTML = ` <?php include 'conn.php'; ?> 
-    <h3>Admin Submitter Form</h3>
-        <div class="registration-form">
+            <h3>Admin Submitter Form</h3>
+    <div class="registration-form">
         <form id="adminForm">
-    <div class="form-group">
-        <input type="text" class="form-control item" id="adminName" placeholder="Fullname">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control item" id="adminUsername" placeholder="Username">
-    </div>
-    <div class="form-group">
-        <input type="password" class="form-control item" id="adminPassword" placeholder="Password">
-    </div>
-    <div class="form-group">
-        <label for="role">Role:</label>
-        <input type="text" class="form-control item" id="adminRole" name="role" value="Admin" readonly>
-    </div>
-    <div class="form-group">
-                <label for="img">Profile Image URL:</label>
-                <input type="url" class="form-control item" id="img" placeholder="Profile Image URL" name="img" required>
+            <div class="form-group">
+                <label for="fname">First Name:</label>
+                <input type="text" class="form-control item" id="fname" placeholder="Example: Juan" required>
             </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create Account</button>
+            <div class="form-group">
+                <label for="mname">Middle Name:</label>
+                <input type="text" class="form-control item" id="mname" placeholder="Example: Dela" required>
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                <input type="text" class="form-control item" id="lname" placeholder="Example: Crunchy" required>
+            </div>
+            <div class="form-group">
+                <label for="ename">Extension Name:</label>
+                <input type="text" class="form-control item" id="ename" placeholder="Example: Sr.">
+            </div>
+            <div class="form-group">
+                <label for="nickname">Nickname:</label>
+                <input type="text" class="form-control item" id="nickname" placeholder="Example: Tutu" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control item" id="age" placeholder="Example: 12" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control item" id="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Birthdate:</label>
+                <input type="date" class="form-control item" id="birthdate" placeholder="Example: 01/01/2001" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control item" id="address" placeholder="Example: Purok. Pinetree, Brgy. Oringao, Kabankalan City, Negros Occidental." required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control item" id="username" placeholder="Example: @JuanFGSNHS" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control item" id="password" placeholder="" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" class="form-control item" id="role" name="role" value="Admin" readonly>
+            </div>
+            <div class="form-group">
+                <label for="img">Profile Image Filename:</label>
+                <input type="text" class="form-control item" id="img" placeholder="Example: juan.jpg" name="img">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </div>
+        </form>
     </div>
-</form>
-
-        </div>
     `;
-            document.getElementById('adminForm').addEventListener('submit', function(e) {
+            document.getElementById('adminForm').addEventListener('submit', function (e) {
                 e.preventDefault(); // Prevent the default form submission
 
                 var name = document.getElementById('adminName').value;
                 var username = document.getElementById('adminUsername').value;
                 var password = document.getElementById('adminPassword').value;
                 var role = document.getElementById('adminRole').value;
-                var img = document.getElementById('img').value; // Get the image URL
+                var img = document.getElementById('img').value; // Get the image filename
 
                 // Send the form data to the server using AJAX
                 var xhr = new XMLHttpRequest();
@@ -309,7 +373,7 @@ document.addEventListener('DOMContentLoaded', showAdmin);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.send('name=' + name + '&username=' + username + '&password=' + password + '&role=' + role + '&img=' + img);
 
-                xhr.onload = function() {
+                xhr.onload = function () {
                     if (this.status == 200) {
                         // Handle the response from the server
                         var response = JSON.parse(this.responseText);
@@ -340,53 +404,74 @@ document.addEventListener('DOMContentLoaded', showAdmin);
         function showAddUser() {
             var mainContent = document.getElementById('mainContent');
             mainContent.innerHTML = ` <h3>Student Submitter Form</h3> <?php include 'conn.php'; ?>
-            <form action="admin.php" method="POST">
-    <div class="registration-form">
+            <div class="registration-form">
+    <form action="submit.php" method="post" id="studentForm">
         <div class="form-group">
-            <label for="name">Fullname:</label>
-            <input type="text" class="form-control item" id="name" placeholder="Fullname" name="name" required>
+            <label for="fname">First Name:</label>
+            <input type="text" class="form-control item" id="fname" name="fname" placeholder="Example: Juan" required>
+        </div>
+        <div class="form-group">
+            <label for="mname">Middle Name:</label>
+            <input type="text" class="form-control item" id="mname" name="mname" placeholder="Example: Dela" required>
+        </div>
+        <div class="form-group">
+            <label for="lname">Last Name:</label>
+            <input type="text" class="form-control item" id="lname" name="lname" placeholder="Example: Crunchy" required>
+        </div>
+        <div class="form-group">
+            <label for="ename">Extension Name:</label>
+            <input type="text" class="form-control item" id="ename" name="ename" placeholder="Example: Sr.">
+        </div>
+        <div class="form-group">
+            <label for="pname">Parent's name:</label>
+            <input type="text" class="form-control item" id="pname" name="pname" placeholder="Example: Pname" required>
+        </div>
+        <div class="form-group">
+            <label for="lrn">Lrn:</label>
+            <input type="text" class="form-control item" id="lrn" name="lrn" placeholder="Example: Lrn" required>
+        </div>
+        <div class="form-group">
+            <label for="nickname">Nickname:</label>
+            <input type="text" class="form-control item" id="nickname" name="nickname" placeholder="Example: Tutu" required>
         </div>
         <div class="form-group">
             <label for="age">Age:</label>
-            <input type="text" class="form-control item" id="age" placeholder="Age" name="age" required>
-        </div>
-        <div class="form-group">
-            <label for="birthdate">Birthdate:</label>
-            <input type="text" class="form-control item" id="birthdate" placeholder="Birth Date" name="birthdate" required>
+            <input type="number" class="form-control item" id="age" name="age" placeholder="Example: 12" required>
         </div>
         <div class="form-group">
             <label for="gender">Gender:</label>
-            <select class="form-control item" id="gender" placeholder="Select Gender" name="gender" required>
+            <select class="form-control item" id="gender" name="gender" required>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
-        </div>            
-        <div class="form-group">
-            <label for="address">Address:</label>
-            <input type="text" class="form-control item" id="address" placeholder="Address" name="address" required>
         </div>
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" class="form-control item" id="email" placeholder="Email" name="email" required>
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" class="form-control item" id="birthdate" name="birthdate" placeholder="Example: 01/01/2001" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control item" id="address" name="address" placeholder="Example: Purok. Pinetree, Brgy. Oringao, Kabankalan City, Negros Occidental." required>
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control item" id="username" name="username" placeholder="Example: @JuanFGSNHS" required>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="text" class="form-control item" id="password" placeholder="Password" name="password" required>
-        </div>
-        <div class="form-group" id="yearlevel-selector">
-            <label for="yearlevel">Grade Level:</label>
-            <select class="form-control item" id="yearlevel" placeholder="Select Year Level" name="yearlevel" required>
-                <option value="grade9">Grade 9</option>
-                <option value="grade10">Grade 10</option>
-            </select>
+            <input type="password" class="form-control item" id="password" name="password" placeholder="" required>
         </div>
         <div class="form-group">
             <label for="role">Role:</label>
             <input type="text" class="form-control item" id="role" name="role" value="student" readonly>
         </div>
-        <div class="form-group" id="section-selector">
+        <div class="form-group">
+            <label for="img">Image:</label>
+            <input type="text" class="form-control item" id="img" name="img" placeholder="Example: image.jpg">
+        </div>
+        <div class="form-group">
             <label for="section">Section:</label>
-            <select class="form-control item" id="section" placeholder="Select Section" name="section" required>
+            <select class="form-control item" id="section" name="section">
                 <option value="section1">Section 1</option>
                 <option value="section2">Section 2</option>
                 <option value="section3">Section 3</option>
@@ -397,137 +482,128 @@ document.addEventListener('DOMContentLoaded', showAdmin);
             </select>
         </div>
         <div class="form-group">
-                <label for="img">Profile Image URL:</label>
-                <input type="url" class="form-control item" id="img" placeholder="Profile Image URL" name="img" required>
-            </div>
+            <label for="yearlevel">Year Level:</label>
+            <select class="form-control item" id="yearlevel" name="yearlevel">
+                <option value="grade9">Grade 9</option>
+                <option value="grade10">Grade 10</option>
+            </select>
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Create Account</button>
         </div>
-    </div>
-</form>
+    </form>
+</div>
+
 `;
+// Get the form element
+var form = document.getElementById('studentForm');
 
-            document.getElementById('mainContent').addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent the default form submission
+// Attach a submit event handler to the form
+form.addEventListener('submit', function(event) {
+    // Prevent the form from being submitted normally
+    event.preventDefault();
 
-                var name = document.getElementById('name').value;
-                var age = document.getElementById('age').value;
-                var birthdate = document.getElementById('birthdate').value;
-                var gender = document.getElementById('gender').value;
-                var address = document.getElementById('address').value;
-                var email = document.getElementById('email').value;
-                var password = document.getElementById('password').value;
-                var role = document.getElementById('role').value;
-                var section = document.getElementById('section').value;
-                var yearlevel = document.getElementById('yearlevel').value;
-                var img = document.getElementById('img').value; // Get the image URL
+    // Create a new FormData object from the form
+    var formData = new FormData(form);
 
-                // Send the form data to the server using AJAX
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'sdbconn.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send('name=' + name + '&age=' + age + '&birthdate=' + birthdate + '&gender=' + gender + '&address=' + address + '&email=' + email + '&password=' + password + '&role=' + role + '&section=' + section + '&yearlevel=' + yearlevel + '&img=' + img);
+    // Use AJAX to submit the form data
+    var request = new XMLHttpRequest();
+    request.open('POST', 'submit.php');
+    request.onreadystatechange = function() {
+        if (request.readyState === 4 && request.status === 200) {
+            // The request has completed successfully
+            Swal.fire(
+                'Success!',
+                'New record created successfully',
+                'success'
+            );
 
-                xhr.onload = function() {
-                    if (this.status == 200) {
-                        // Handle the response from the server
-                        var response = JSON.parse(this.responseText);
-                        console.log(response);
-                        if (response.message === 'New record created successfully') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: 'Account was successfully created!'
-                            });
-                            // Clear the form
-                            document.getElementById('mainContent').reset();
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'There was an error creating the account: ' + response.message
-                            });
-                        }
-                    }
-                };
-            });
+            // Reset the form fields
+            form.reset();
         }
-//students//
-function showManageClass() {
-    var mainContent = document.getElementById('mainContent');
-
-    // Create and configure the grade level selector
-    var gradeLevelSelect = document.createElement('select');
-    gradeLevelSelect.id = 'gradeLevel';
-    gradeLevelSelect.className = 'form-select';
-    gradeLevelSelect.style = 'width: auto; display: inline-block; margin-left: 10px;'; // Adjust styles to position near search bar
-    gradeLevelSelect.onchange = function() {
-        showStudents(this.value);
     };
+    request.send(formData);
+});
+        }
 
-    for (var i = 7; i <= 10; i++) {
-        var option = document.createElement('option');
-        option.value = 'grade' + i; // The value is the table name
-        option.text = 'Grade ' + i;
-        gradeLevelSelect.add(option);
-    }
 
-    // Create the table
-    var table = document.createElement('table');
-    table.className = 'table table-striped smaller-table';
-    table.id = 'studentTable';
 
-    var headers = ['#', 'Full Name', 'Age', 'Gender', 'Birthdate', 'Address', 'Username', 'Password', 'Section'];
-    var thead = document.createElement('thead');
-    var tr = document.createElement('tr');
+        //students//
+        function showManageClass() {
+            var mainContent = document.getElementById('mainContent');
 
-    headers.forEach(function(header) {
-        var th = document.createElement('th');
-        th.scope = 'col';
-        th.textContent = header;
-        tr.appendChild(th);
-    });
+            // Create and configure the grade level selector
+            var gradeLevelSelect = document.createElement('select');
+            gradeLevelSelect.id = 'gradeLevel';
+            gradeLevelSelect.className = 'form-select';
+            gradeLevelSelect.style = 'width: auto; display: inline-block; margin-left: 10px;'; // Adjust styles to position near search bar
+            gradeLevelSelect.onchange = function () {
+                showStudents(this.value);
+            };
 
-    thead.appendChild(tr);
-    table.appendChild(thead);
+            for (var i = 7; i <= 10; i++) {
+                var option = document.createElement('option');
+                option.value = 'grade' + i; // The value is the table name
+                option.text = 'Grade ' + i;
+                gradeLevelSelect.add(option);
+            }
 
-    // Create the table body
-    var tbody = document.createElement('tbody');
-    table.appendChild(tbody);
+            // Create the table
+            var table = document.createElement('table');
+            table.className = 'table table-striped smaller-table';
+            table.id = 'studentTable';
 
-    // Add the selectors and table to the main content
-    mainContent.innerHTML = '<h1 style="text-align: center;">List of Students</h1>';
-    mainContent.appendChild(gradeLevelSelect); // Add grade level selector
-    mainContent.appendChild(table);
+            var headers = ['#', 'Full Name', 'Age', 'Gender', 'Birthdate', 'Address', 'Username', 'Password', 'Section'];
+            var thead = document.createElement('thead');
+            var tr = document.createElement('tr');
 
-    // Load initial data for grade 9 (Modify this if default grade level is different)
-    showStudents(gradeLevelSelect.value);
-}
+            headers.forEach(function (header) {
+                var th = document.createElement('th');
+                th.scope = 'col';
+                th.textContent = header;
+                tr.appendChild(th);
+            });
 
-function showStudents(gradeLevel) {
-    // Fetch the data from the database
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'fetch_data.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('grade=' + gradeLevel);
+            thead.appendChild(tr);
+            table.appendChild(thead);
 
-    xhr.onload = function() {
-        if (this.status == 200) {
-            // Parse the response
-            var data = JSON.parse(this.responseText);
+            // Create the table body
+            var tbody = document.createElement('tbody');
+            table.appendChild(tbody);
 
-            // Get the table body
-            var tbody = document.querySelector('#studentTable tbody');
+            // Add the selectors and table to the main content
+            mainContent.innerHTML = '<h1 style="text-align: center;">List of Students</h1>';
+            mainContent.appendChild(gradeLevelSelect); // Add grade level selector
+            mainContent.appendChild(table);
 
-            // Clear the current table data
-            tbody.innerHTML = '';
+            // Load initial data for grade 9 (Modify this if default grade level is different)
+            showStudents(gradeLevelSelect.value);
+        }
 
-            // Add the new data to the table
-            data.forEach(function(row, index) {
-                var tr = document.createElement('tr');
+        function showStudents(gradeLevel) {
+            // Fetch the data from the database
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'fetch_data.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('grade=' + gradeLevel);
 
-                // Add each column to the row
-                tr.innerHTML = `
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    // Parse the response
+                    var data = JSON.parse(this.responseText);
+
+                    // Get the table body
+                    var tbody = document.querySelector('#studentTable tbody');
+
+                    // Clear the current table data
+                    tbody.innerHTML = '';
+
+                    // Add the new data to the table
+                    data.forEach(function (row, index) {
+                        var tr = document.createElement('tr');
+
+                        // Add each column to the row
+                        tr.innerHTML = `
                     <th scope="row">${index + 1}</th>
                     <td>${row.fullname}</td>
                     <td>${row.age}</td>
@@ -539,27 +615,32 @@ function showStudents(gradeLevel) {
                     <td>${row.section}</td>
                 `;
 
-                // Add the row to the table body
-                tbody.appendChild(tr);
-            });
+                        // Add the row to the table body
+                        tbody.appendChild(tr);
+                    });
 
-            // Initialize DataTable with search, entries control, and pagination
-            $('#studentTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
+                    // If DataTable already exists, destroy it
+                    if ($.fn.DataTable.isDataTable('#studentTable')) {
+                        $('#studentTable').DataTable().destroy();
+                    }
+
+                    // Initialize DataTable with search, entries control, and pagination
+                    $('#studentTable').DataTable({
+                        "paging": true,
+                        "lengthChange": true,
+                        "searching": true,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": false
+                    });
+                }
+            };
         }
-    };
-}
 
-// Ensure the function is called to render the manage class table on page load
-document.addEventListener('DOMContentLoaded', function() {
-    showManageClass();
-});
+        // Ensure the function is called to render the manage class table on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            showManageClass();
+        });
 
 
 
@@ -572,7 +653,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mainContent.innerHTML = `
         <style>
             .smaller-table {
-                font-size: 0.6em; /* Adjust as needed */
+                font-size: 0.8em; /* Adjust as needed */
                 width: 80%; /* Adjust as needed */
                 margin: auto;
             }
@@ -581,52 +662,65 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         </style>
         <h1 style="text-align: center;">List of Teachers</h1>
-        <table class="table" id="teacherTable">
+        <table id="adminTable" class="table table-striped smaller-table" style="width:100%">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Full Name</th>
+                    <th scope="col">Fullname</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Address</th>
                     <th scope="col">Gender</th>
-                    <th scope="col">Birthdate</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Role</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fullname</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Gender</th>
+                </tr>
+            </tfoot>
         </table>
     `;
 
-            // Fetch the teacher data from the server using AJAX
+            // Fetch the admin data from the server using AJAX
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'fetch_teachers.php', true);
-            xhr.onload = function() {
+            xhr.onload = function () {
                 if (this.status == 200) {
                     // Parse the JSON data
                     var teachers = JSON.parse(this.responseText);
 
                     // Get the table body
-                    var tbody = document.querySelector('#teacherTable tbody');
+                    var tbody = document.querySelector('#adminTable tbody');
 
                     // Insert the teacher data into the table
                     for (var i = 0; i < teachers.length; i++) {
                         var tr = document.createElement('tr');
-                        tr.innerHTML = '<th scope="row">' + (i + 1) + '</th>' +
-                            '<td>' + teachers[i].name + '</td>' +
-                            '<td>' + teachers[i].gender + '</td>' +
-                            '<td>' + teachers[i].birthdate + '</td>' +
-                            '<td>' + teachers[i].email + '</td>' +
-                            '<td>' + teachers[i].username + '</td>' +
-                            '<td>' + teachers[i].password + '</td>' +
-                            '<td>' + teachers[i].role + '</td>';
+                        var fullname = `${teachers[i].fname} ${teachers[i].mname} ${teachers[i].lname} ${teachers[i].ename}`;
+                        tr.innerHTML = `
+                    <th scope="row">${i + 1}</th>
+                    <td>${fullname}</td>
+                    <td>${teachers[i].age}</td>
+                    <td>${teachers[i].address}</td>
+                    <td>${teachers[i].gender}</td>
+                `;
                         tbody.appendChild(tr);
                     }
+
+                    // Initialize DataTable
+                    $('#adminTable').DataTable();
                 }
             };
             xhr.send();
         }
+
+        // Ensure the function is called to render the teachers table
+        document.addEventListener('DOMContentLoaded', showFaculty);
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.8/datatables.min.js"></script>

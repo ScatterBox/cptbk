@@ -14,19 +14,23 @@ if ($conn->connect_error) {
 }
 
 // Get the form data
-$name = $_POST['name'];
+$fname = $_POST['fname'];
+$mname = $_POST['mname'];
+$lname = $_POST['lname'];
+$ename = $_POST['ename'];
+$nickname = $_POST['nickname'];
 $age = $_POST['age'];
-$birthdate = $_POST['birthdate'];
 $gender = $_POST['gender'];
-$email = $_POST['email'];
+$birthdate = $_POST['birthdate'];
+$address = $_POST['address'];
 $username = $_POST['username'];
 $password = $_POST['password'];
 $role = $_POST['role'];
 $img = $_POST['img']; // Get the image URL
 
 // Prepare and bind
-$stmt = $conn->prepare("INSERT INTO teachers (name, age, birthdate, gender, email, username, password, role, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sisssssss", $name, $age, $birthdate, $gender, $email, $username, $password, $role, $img);
+$stmt = $conn->prepare("INSERT INTO teachers (fname, mname, lname, ename, nickname, age, gender, birthdate, address, username, password, role, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssisssssss", $fname, $mname, $lname, $ename, $nickname, $age, $gender, $birthdate, $address, $username, $password, $role, $img);
 
 // Execute the statement
 if ($stmt->execute()) {
