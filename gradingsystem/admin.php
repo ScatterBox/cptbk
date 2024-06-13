@@ -177,115 +177,107 @@ if ($_SESSION['role'] !== 'admin') {
         function showNewTeacher() {
             var mainContent = document.getElementById('mainContent');
             mainContent.innerHTML = `  <?php include 'conn.php'; ?>
-    <h3>Teacher Submitter Form</h3>
-        <div class="registration-form">
-        <form id="teacherForm">
+            <h3>Teacher Submitter Form</h3>
+<div class="registration-form">
+    <form id="teacherForm">
         <div class="form-group">
-                <label for="fname">First Name:</label>
-                <input type="text" class="form-control item" id="fname" placeholder="Example: Juan" required>
-            </div>
-            <div class="form-group">
-                <label for="mname">Middle Name:</label>
-                <input type="text" class="form-control item" id="mname" placeholder="Example: Dela" required>
-            </div>
-            <div class="form-group">
-                <label for="lname">Last Name:</label>
-                <input type="text" class="form-control item" id="lname" placeholder="Example: Crunchy" required>
-            </div>
-            <div class="form-group">
-                <label for="ename">Extension Name:</label>
-                <input type="text" class="form-control item" id="ename" placeholder="Example: Sr.">
-            </div>
-            <div class="form-group">
-                <label for="nickname">Nickname:</label>
-                <input type="text" class="form-control item" id="nickname" placeholder="Example: Tutu" required>
-            </div>
-            <div class="form-group">
-                <label for="age">Age:</label>
-                <input type="number" class="form-control item" id="age" placeholder="Example: 12" required>
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select class="form-control item" id="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="birthdate">Birthdate:</label>
-                <input type="date" class="form-control item" id="birthdate" placeholder="Example: 01/01/2001">
-            </div>
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <input type="text" class="form-control item" id="address" placeholder="Example: Purok. Pinetree, Brgy. Oringao, Kabankalan City, Negros Occidental." required>
-            </div>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control item" id="username" placeholder="Example: @JuanFGSNHS" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control item" id="password" placeholder="" required>
-            </div>
-                <div class="form-group">
-                    <label for="role">Role:</label>
-                    <input type="text" class="form-control item" id="role" name="role" value="teacher" readonly>
-                </div>
-                <div class="form-group">
-                <label for="img">Profile Image URL:</label>
-                <input type="url" class="form-control item" id="img" placeholder="Example: juan.jpg" name="img" required>
-            </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Create Account</button>                
-                </div>
-            </form>
+            <label for="fname">First Name:</label>
+            <input type="text" class="form-control item" id="fname" name="fname" placeholder="Example: Juan" required>
         </div>
+        <div class="form-group">
+            <label for="mname">Middle Name:</label>
+            <input type="text" class="form-control item" id="mname" name="mname" placeholder="Example: Dela" required>
+        </div>
+        <div class="form-group">
+            <label for="lname">Last Name:</label>
+            <input type="text" class="form-control item" id="lname" name="lname" placeholder="Example: Crunchy" required>
+        </div>
+        <div class="form-group">
+            <label for="ename">Extension Name:</label>
+            <input type="text" class="form-control item" id="ename" name="ename" placeholder="Example: Sr.">
+        </div>
+        <div class="form-group">
+            <label for="nickname">Nickname:</label>
+            <input type="text" class="form-control item" id="nickname" name="nickname" placeholder="Example: Tutu" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" class="form-control item" id="age" name="age" placeholder="Example: 12" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select class="form-control item" id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" class="form-control item" id="birthdate" name="birthdate" placeholder="Example: 01/01/2001" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control item" id="address" name="address" placeholder="Example: Purok. Pinetree, Brgy. Oringao, Kabankalan City, Negros Occidental." required>
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control item" id="username" name="username" placeholder="Example: @JuanFGSNHS" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control item" id="password" name="password" placeholder="" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <input type="text" class="form-control item" id="role" name="role" value="teacher" readonly>
+        </div>
+        <div class="form-group">
+            <label for="img">Profile Image URL:</label>
+            <input type="text" class="form-control item" id="img" name="img" placeholder="Example: juan.jpg" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create Account</button>                
+        </div>
+    </form>
+</div>
     `;
-            document.getElementById('teacherForm').addEventListener('submit', function (e) {
-                e.preventDefault(); // Prevent the default form submission
+            // Get the form element
+            var form = document.getElementById('teacherForm');
 
-                var fname = document.getElementById('fname').value;
-                var mname = document.getElementById('mname').value;
-                var lname = document.getElementById('lname').value;
-                var ename = document.getElementById('ename').value;
-                var nickname = document.getElementById('nickname').value;
-                var age = document.getElementById('age').value;
-                var gender = document.getElementById('gender').value;
-                var birthdate = document.getElementById('birthdate').value;
-                var address = document.getElementById('address').value;
-                var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
-                var role = document.getElementById('role').value;
-                var img = document.getElementById('img').value; // Get the image URL
+            // Attach a submit event handler to the form
+            form.addEventListener('submit', function (event) {
+                // Prevent the form from being submitted normally
+                event.preventDefault();
 
-                // Send the form data to the server using AJAX
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'tdbconn.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send('fname=' + fname + '&mname=' + mname + '&lname=' + lname + '&ename=' + ename + '&nickname=' + nickname + '&age=' + age + '&birthdate=' + birthdate + '&gender=' + gender + '&address=' + address + '&username=' + username + '&password=' + password + '&role=' + role + '&img=' + img);
+                // Create a new FormData object from the form
+                var formData = new FormData(form);
 
-                xhr.onload = function () {
-                    if (this.status == 200) {
-                        // Handle the response from the server
-                        var response = JSON.parse(this.responseText);
-                        console.log(response);
-                        if (response.message === 'New record created successfully') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: 'Account was successfully created!'
-                            });
-                            // Clear the form
-                            document.getElementById('teacherForm').reset();
+                // Use AJAX to submit the form data
+                var request = new XMLHttpRequest();
+                request.open('POST', 'tdbconn.php');
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4 && request.status === 200) {
+                        // The request has completed successfully
+                        var response = JSON.parse(request.responseText);
+                        if (response.success) {
+                            Swal.fire(
+                                'Success!',
+                                response.message,
+                                'success'
+                            );
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
-                                text: 'There was an error creating the account: ' + response.message
+                                text: response.message
                             });
                         }
+
+                        // Reset the form fields
+                        form.reset();
                     }
                 };
+                request.send(formData);
             });
         }
 
@@ -294,55 +286,55 @@ if ($_SESSION['role'] !== 'admin') {
         function showNewAdmin() {
             var mainContent = document.getElementById('mainContent');
             mainContent.innerHTML = ` <?php include 'conn.php'; ?> 
-            <h3>Admin Submitter Form</h3>
+    <h3>Admin Submitter Form</h3>
     <div class="registration-form">
         <form id="adminForm">
             <div class="form-group">
                 <label for="fname">First Name:</label>
-                <input type="text" class="form-control item" id="fname" placeholder="Example: Juan" required>
+                <input type="text" class="form-control item" id="fname" name="fname" placeholder="Example: Juan" required>
             </div>
             <div class="form-group">
                 <label for="mname">Middle Name:</label>
-                <input type="text" class="form-control item" id="mname" placeholder="Example: Dela" required>
+                <input type="text" class="form-control item" id="mname" name="mname" placeholder="Example: Dela" required>
             </div>
             <div class="form-group">
                 <label for="lname">Last Name:</label>
-                <input type="text" class="form-control item" id="lname" placeholder="Example: Crunchy" required>
+                <input type="text" class="form-control item" id="lname" name="lname" placeholder="Example: Crunchy" required>
             </div>
             <div class="form-group">
                 <label for="ename">Extension Name:</label>
-                <input type="text" class="form-control item" id="ename" placeholder="Example: Sr.">
+                <input type="text" class="form-control item" id="ename" name="ename" placeholder="Example: Sr.">
             </div>
             <div class="form-group">
                 <label for="nickname">Nickname:</label>
-                <input type="text" class="form-control item" id="nickname" placeholder="Example: Tutu" required>
+                <input type="text" class="form-control item" id="nickname" name="nickname" placeholder="Example: Tutu" required>
             </div>
             <div class="form-group">
                 <label for="age">Age:</label>
-                <input type="number" class="form-control item" id="age" placeholder="Example: 12" required>
+                <input type="number" class="form-control item" id="age" name="age" placeholder="Example: 12" required>
             </div>
             <div class="form-group">
                 <label for="gender">Gender:</label>
-                <select class="form-control item" id="gender" required>
+                <select class="form-control item" id="gender" name="gender" required>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="birthdate">Birthdate:</label>
-                <input type="date" class="form-control item" id="birthdate" placeholder="Example: 01/01/2001" required>
+                <input type="date" class="form-control item" id="birthdate" name="birthdate" placeholder="Example: 01/01/2001" required>
             </div>
             <div class="form-group">
                 <label for="address">Address:</label>
-                <input type="text" class="form-control item" id="address" placeholder="Example: Purok. Pinetree, Brgy. Oringao, Kabankalan City, Negros Occidental." required>
+                <input type="text" class="form-control item" id="address" name="address" placeholder="Example: Purok. Pinetree, Brgy. Oringao, Kabankalan City, Negros Occidental." required>
             </div>
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control item" id="username" placeholder="Example: @JuanFGSNHS" required>
+                <input type="text" class="form-control item" id="username" name="username" placeholder="Example: @JuanFGSNHS" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control item" id="password" placeholder="" required>
+                <input type="password" class="form-control item" id="password" name="password" placeholder="" required>
             </div>
             <div class="form-group">
                 <label for="role">Role:</label>
@@ -350,7 +342,7 @@ if ($_SESSION['role'] !== 'admin') {
             </div>
             <div class="form-group">
                 <label for="img">Profile Image Filename:</label>
-                <input type="text" class="form-control item" id="img" placeholder="Example: juan.jpg" name="img">
+                <input type="text" class="form-control item" id="img" name="img" placeholder="Example: juan.jpg">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Create Account</button>
@@ -358,43 +350,43 @@ if ($_SESSION['role'] !== 'admin') {
         </form>
     </div>
     `;
-            document.getElementById('adminForm').addEventListener('submit', function (e) {
-                e.preventDefault(); // Prevent the default form submission
+            // Get the form element
+            var form = document.getElementById('adminForm');
 
-                var name = document.getElementById('adminName').value;
-                var username = document.getElementById('adminUsername').value;
-                var password = document.getElementById('adminPassword').value;
-                var role = document.getElementById('adminRole').value;
-                var img = document.getElementById('img').value; // Get the image filename
+            // Attach a submit event handler to the form
+            form.addEventListener('submit', function (event) {
+                // Prevent the form from being submitted normally
+                event.preventDefault();
 
-                // Send the form data to the server using AJAX
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'adbconn.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send('name=' + name + '&username=' + username + '&password=' + password + '&role=' + role + '&img=' + img);
+                // Create a new FormData object from the form
+                var formData = new FormData(form);
 
-                xhr.onload = function () {
-                    if (this.status == 200) {
-                        // Handle the response from the server
-                        var response = JSON.parse(this.responseText);
-                        console.log(response);
-                        if (response.message === 'New record created successfully') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: 'Account was successfully created!'
-                            });
-                            // Clear the form
-                            document.getElementById('adminForm').reset();
+                // Use AJAX to submit the form data
+                var request = new XMLHttpRequest();
+                request.open('POST', 'adbconn.php');
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4 && request.status === 200) {
+                        // The request has completed successfully
+                        var response = JSON.parse(request.responseText);
+                        if (response.success) {
+                            Swal.fire(
+                                'Success!',
+                                response.message,
+                                'success'
+                            );
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
-                                text: 'There was an error creating the account: ' + response.message
+                                text: response.message
                             });
                         }
+
+                        // Reset the form fields
+                        form.reset();
                     }
                 };
+                request.send(formData);
             });
         }
 
@@ -495,35 +487,35 @@ if ($_SESSION['role'] !== 'admin') {
 </div>
 
 `;
-// Get the form element
-var form = document.getElementById('studentForm');
+            // Get the form element
+            var form = document.getElementById('studentForm');
 
-// Attach a submit event handler to the form
-form.addEventListener('submit', function(event) {
-    // Prevent the form from being submitted normally
-    event.preventDefault();
+            // Attach a submit event handler to the form
+            form.addEventListener('submit', function (event) {
+                // Prevent the form from being submitted normally
+                event.preventDefault();
 
-    // Create a new FormData object from the form
-    var formData = new FormData(form);
+                // Create a new FormData object from the form
+                var formData = new FormData(form);
 
-    // Use AJAX to submit the form data
-    var request = new XMLHttpRequest();
-    request.open('POST', 'submit.php');
-    request.onreadystatechange = function() {
-        if (request.readyState === 4 && request.status === 200) {
-            // The request has completed successfully
-            Swal.fire(
-                'Success!',
-                'New record created successfully',
-                'success'
-            );
+                // Use AJAX to submit the form data
+                var request = new XMLHttpRequest();
+                request.open('POST', 'submit.php');
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4 && request.status === 200) {
+                        // The request has completed successfully
+                        Swal.fire(
+                            'Success!',
+                            'New record created successfully',
+                            'success'
+                        );
 
-            // Reset the form fields
-            form.reset();
-        }
-    };
-    request.send(formData);
-});
+                        // Reset the form fields
+                        form.reset();
+                    }
+                };
+                request.send(formData);
+            });
         }
 
 
